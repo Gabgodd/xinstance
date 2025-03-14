@@ -1,0 +1,46 @@
+PS C:\Users\Administrator\Desktop> Set-ExecutionPolicy Bypass
+PS C:\Users\Administrator\Desktop> .\c.ps1
+At C:\Users\Administrator\Desktop\c.ps1:44 char:60
++ ... script type="application/json" id="client-env">{"locale":"en","featur ...
++                                                             ~~~~~
+Unexpected token ':"en"' in expression or statement.
+At C:\Users\Administrator\Desktop\c.ps1:44 char:65
++ ... cript type="application/json" id="client-env">{"locale":"en","feature ...
++                                                                 ~
+Missing argument in parameter list.
+At C:\Users\Administrator\Desktop\c.ps1:44 char:1175
++ ... stive_prompts","issue_types_prevent_private_type_creation"]}</script>
++                                                                 ~
+The '<' operator is reserved for future use.
+At C:\Users\Administrator\Desktop\c.ps1:231 char:84
++ ... tion/json" data-target="react-partial.embeddedData">{"props":{"docsUr ...
++                                                                 ~
+Unexpected token ':' in expression or statement.
+At C:\Users\Administrator\Desktop\c.ps1:231 char:95
++ ... ":{"docsUrl":"https://docs.github.com/get-started/accessibility/keybo ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Unexpected token ':"https://docs.github.com/get-started/accessibility/keyboard-shortcuts"' in expression or statement.
+At C:\Users\Administrator\Desktop\c.ps1:231 char:168
++ ... s.github.com/get-started/accessibility/keyboard-shortcuts"}}</script>
++                                                                 ~
+The '<' operator is reserved for future use.
+At C:\Users\Administrator\Desktop\c.ps1:255 char:254
++ ... ink Button--medium Button d-lg-none color-fg-inherit p-1">  <span cla ...
++                                                                 ~
+The '<' operator is reserved for future use.
+At C:\Users\Administrator\Desktop\c.ps1:299 char:49
++                 <ul class="list-style-none f5" >
++                                                 ~
+Missing file specification after redirection operator.
+At C:\Users\Administrator\Desktop\c.ps1:575 char:14
++ </a>         </div>
++              ~
+The '<' operator is reserved for future use.
+At C:\Users\Administrator\Desktop\c.ps1:644 char:14
++       Events &amp; Webinars
++              ~
+The ampersand (&) character is not allowed. The & operator is reserved for future use; wrap an ampersand in double
+quotation marks ("&") to pass it as part of a string.
+Not all parse errors were reported.  Correct the reported errors and try again.
+    + CategoryInfo          : ParserError: (:) [], ParseException
+    + FullyQualifiedErrorId : UnexpectedToken
