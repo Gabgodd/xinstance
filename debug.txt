@@ -1,3 +1,8 @@
+https://github.com/Gabgodd/xinstance/raw/refs/heads/main/c.ps1
+https://github.com/Gabgodd/xinstance/raw/refs/heads/main/aws_credentials.enc
+
+
+
 PS C:\Users\Administrator\Desktop> Set-ExecutionPolicy Bypass
 PS C:\Users\Administrator\Desktop> .\c.ps1
 Enter the password to decrypt AWS credentials: 2023
