@@ -35,7 +35,7 @@ function Get-DecryptedCredentials {
     }
 
     $encryptedCredentials = Get-Content -Path $encryptedFile
-    $secureString = ConvertTo-SecureString -String $encryptedCredentials
+    $secureString = ConvertTo-SecureString -String $encryptedCredentials -Key (1..32 | ForEach-Object { [byte]$_ })
     $credentials = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureString))
 
     # Verify the password
