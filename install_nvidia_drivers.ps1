@@ -7,7 +7,7 @@ function Install-NvidiaDriversAWS {
 
     # Step 2: Install AWSPowerShell module
     Write-Log "Installing AWSPowerShell module..."
-    Install-Module -Name AWSPowerShell -Force -AllowClobber
+    Install-Module -Name AWSPowerShell -Force -AllowClobber -Verbose
 
     # Step 3: Set AWS credentials
     Write-Log "Setting AWS credentials..."
