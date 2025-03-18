@@ -32,12 +32,19 @@ If (-Not (Test-Path -Path $folderPath)) {
 . .\configure_firewall.ps1
 
 # Call individual scripts
-Decrypt-AWSCredentials
+$credentials = Decrypt-AWSCredentials
+if ($credentials -ne $null) {
+    $awsAccessKey = $credentials[0]
+    $awsSecretKey = $credentials[1]
+    Install-NvidiaDriversAWS -awsAccessKey $awsAccessKey -awsSecretKey $awsSecretKey
+} else {
+    Write-Log "AWS credentials not available. Skipping NVIDIA drivers installation."
+}
+
 Configure-System
 Install-7Zip
 Install-Sunshine
 Install-ArmageddonBrowser
-Install-NvidiaDriversAWS
 Install-GoogleChrome
 Install-OpenComposite
 Install-Xbox360ControllerDriver
