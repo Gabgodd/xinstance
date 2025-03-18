@@ -31,36 +31,39 @@ function Install-NvidiaDriversAWS {
     }
     Write-Log "AWS credentials verified successfully!"
 
-    # Step 4: Download and install NVIDIA drivers
-    Write-Log "Downloading NVIDIA drivers..."
+    # Step 4: Download NVIDIA drivers
     $Bucket = "ec2-windows-nvidia-drivers"
-    $KeyPrefix = "latest"
+    $KeyPrefix = "latest/NVIDIA-driver.exe" # Specify the exact driver file needed
     $LocalPath = "$env:USERPROFILE\Desktop\scriptstuff\NVIDIA"
-    New-Item -ItemType Directory -Path $LocalPath -Force
-    try {
-        $Objects = Get-S3Object -BucketName $Bucket -KeyPrefix $KeyPrefix -Region us-east-1 -Verbose
-        foreach ($Object in $Objects) {
-            $LocalFileName = $Object.Key
-            if ($LocalFileName -ne '' -and $Object.Size -ne 0) {
-                $LocalFilePath = Join-Path $LocalPath $LocalFileName
-                Write-Log "Downloading $LocalFileName..."
-                Copy-S3Object -BucketName $Bucket -Key $Object.Key -LocalFile $LocalFilePath -Region us-east-1 -Verbose
-            }
+    $LocalFilePath = Join-Path $LocalPath "NVIDIA-driver.exe"
+
+    # Create directory if it doesn't exist
+    if (-not (Test-Path -Path $LocalPath)) {
+        New-Item -ItemType Directory -Path $LocalPath -Force
+    }
+
+    # Check if the driver file already exists
+    if (-not (Test-Path -Path $LocalFilePath)) {
+        Write-Log "Downloading NVIDIA driver..."
+        try {
+            Copy-S3Object -BucketName $Bucket -Key $KeyPrefix -LocalFile $LocalFilePath -Region us-east-1 -Verbose
+            Write-Log "NVIDIA driver downloaded successfully!"
+        } catch {
+            Write-Log "Failed to download NVIDIA driver: $_"
+            return
         }
-        Write-Log "NVIDIA drivers downloaded successfully!"
-    } catch {
-        Write-Log "Failed to download NVIDIA drivers: $_"
-        return
+    } else {
+        Write-Log "NVIDIA driver already exists. Skipping download."
     }
 
     # Step 5: Install NVIDIA drivers
     Write-Log "Installing NVIDIA drivers..."
-    $driverInstaller = Get-ChildItem -Path "$LocalPath" -Filter *.exe | Select-Object -First 1
+    $driverInstaller = Get-Item -Path $LocalFilePath
     if ($driverInstaller) {
         Start-Process -FilePath $driverInstaller.FullName -ArgumentList "/s" -Wait -Verbose
         Write-Log "NVIDIA drivers installed successfully!"
     } else {
-        Write-Log "No NVIDIA driver installer found in $LocalPath!"
+        Write-Log "No NVIDIA driver installer found!"
     }
 
     # Step 6: Disable default wired display
