@@ -1,3 +1,6 @@
+# Utility functions
+
+# Function to write logs
 function Write-Log {
     param (
         [string]$Message,
@@ -6,17 +9,13 @@ function Write-Log {
 
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logMessage = "$timestamp - $Message"
+    
+    # Ensure the logging directory exists
+    $logDir = [System.IO.Path]::GetDirectoryName($LogFile)
+    if (-not (Test-Path -Path $logDir)) {
+        New-Item -ItemType Directory -Path $logDir -Force
+    }
+
     Add-Content -Path $LogFile -Value $logMessage
     Write-Output $logMessage
-}
-
-function Download-FileWithBITS {
-    param (
-        [string]$url,
-        [string]$output
-    )
-
-    Write-Log "Downloading file from $url to $output..."
-    Start-BitsTransfer -Source $url -Destination $output
-    Write-Log "Download completed."
 }
